@@ -1,17 +1,20 @@
 spring:
   application:
     name: EUREKA-SERVER
-    
 server:
-  port: 8761
-  
-  
+  port: 9080
+
 eureka:
+  server:
+    enable-self-preservation: false
+    renewalPercentThreshold: 0.33
   instance:
     hostname: localhost
-    instance-id: ${spring.application.name}:${server.port}
+    nonSecurePort: ${server.port}
   client:
+    healthcheck:
+      enabled: true
     register-with-eureka: false
     fetch-registry: false
     service-url:
-      defaultZone: http://localhost:${server.port}/eureka
+      default-zone: http://${eureka.instance.hostname}:${server.port}/eureka/
