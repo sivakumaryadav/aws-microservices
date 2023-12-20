@@ -35,7 +35,7 @@ management:
     enabled-by-default: true
     web:
       exposure:
-        include: health, info, env, beans, loggers
+        include: health, info, env, beans, loggers, refresh, bus-refresh
        # exclude:
         #  - threaddump
  

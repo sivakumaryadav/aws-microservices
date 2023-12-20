@@ -1,0 +1,32 @@
+
+
+server:
+  port: 9085
+
+spring:
+  application:
+    name: EUREKA-CONFIG-CLIENT
+  config:
+    import:
+      - optional:configserver:http://localhost:9084
+      #- optional:file:/absolute/path/to/the/project/root/ 
+  #cloud:
+    #config:
+      #name: http://localhost:9084
+eureka:
+  instance:
+    instance-id: EUREKA-CONFIG-CLIENT
+    appname: EUREKA-CONFIG-CLIENT
+  client:
+    service-url:
+      defaultZone: http://localhost:9080/eureka
+
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: health, info, env, beans, loggers, refresh, bus-refresh
+       # exclude:
+        #  - threaddump
+
