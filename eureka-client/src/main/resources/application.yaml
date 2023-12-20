@@ -1,3 +1,6 @@
+server:
+  port: 9081
+
 spring:
   application:
     name: EUREKA-CLIENT-APP
@@ -21,10 +24,11 @@ spring:
        
 eureka:
   instance:
-    instance-id: ${spring.application.name}:${server.port}
+    instance-id: EUREKA-CLIENT-APP
+    appname: EUREKA-CLIENT-APP
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://localhost:9080/eureka
 
 management:
   endpoints:
@@ -32,8 +36,6 @@ management:
     web:
       exposure:
         include: health, info, env, beans, loggers
-        exclude:
-          - threaddump
-    
-server:
-  port: 8011
+       # exclude:
+        #  - threaddump
+ 
