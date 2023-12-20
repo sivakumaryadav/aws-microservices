@@ -1,0 +1,38 @@
+server:
+  port: 9083
+
+eureka:
+  instance:
+    appname: ${spring.application.name}
+    instance-id: ${spring.application.name}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9080/eureka
+
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      routes:
+      - id: employees
+        uri: lb://EUREKA-CLIENT-APP
+        predicates:
+          - Path=/employee/**
+      - id: departments
+        uri: lb://EUREKA-FEIGN-CLIENT-APP
+        predicates:
+          - Path=/department/**
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
+    loadbalancer:
+      configurations: health-check
+
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: health, info, env, beans, loggers
