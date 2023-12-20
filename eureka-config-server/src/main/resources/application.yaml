@@ -1,0 +1,31 @@
+server:
+  port: 9084
+
+spring:
+  application:
+    name: EUREKA-CONFIG-SERVER
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/sivakumaryadav/app-cloud-config.git
+          skipSslValidation: true
+          clone-on-start: true
+          default-label: master
+
+eureka:
+  instance:
+    instance-id: EUREKA-CONFIG-SERVER
+    appname: EUREKA-CONFIG-SERVER
+  client:
+    service-url:
+      defaultZone: http://localhost:9080/eureka
+
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: health, info, env, beans, loggers, refresh, bus-refresh
+       # exclude:
+        #  - threaddump
